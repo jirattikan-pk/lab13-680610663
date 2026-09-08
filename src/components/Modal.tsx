@@ -10,13 +10,25 @@ export default function Modal({ onAdd }: props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if(title.trim()){
+    const newtodo={
+      id: uuidv4(),
+      title,
+      description,
+      isDone:false,
+    };
+    onAdd(newtodo);
+    setTitle("");
+    setDescription("");
+  }
+  };
 
   const titleOnchange = (event: any) => {
     setTitle(event.target.value);
   };
 
-  const descriptionOnchang = (event: any) => {
+  const descriptionOnchange = (event: any) => {
     setDescription(event.target.value);
   };
 
@@ -45,7 +57,7 @@ export default function Modal({ onAdd }: props) {
               className="form-control"
               placeholder="description..."
               value={description}
-              onChange={descriptionOnchang}
+              onChange={descriptionOnchange}
             ></textarea>
           </div>
           <div className="modal-footer">
@@ -60,7 +72,7 @@ export default function Modal({ onAdd }: props) {
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => {}}
+              onClick={handleSubmit}
             >
               Save
             </button>
